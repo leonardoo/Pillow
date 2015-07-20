@@ -22,8 +22,8 @@ class BaseBmpImageFormat(object):
 
     def get_width_heigth(self):
         size = self._header_data[0:self.LEN*2]
-        width = self.METHOD(size[:len(size)/2])
-        height = self.METHOD(size[len(size)/2:])
+        width = self.METHOD(size[:self.LEN])
+        height = self.METHOD(size[self.LEN:])
         return width, height
 
     def get_planes_bits(self):
