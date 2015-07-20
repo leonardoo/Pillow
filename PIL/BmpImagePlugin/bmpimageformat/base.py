@@ -21,7 +21,7 @@ class BaseBmpImageFormat(object):
         return file_info
 
     def get_width_heigth(self):
-        size = self._header_data.[0:self.LEN*2]
+        size = self._header_data[0:self.LEN*2]
         width = self.METHOD(size[:len(size)/2])
         height = self.METHOD(size[len(size)/2:])
         return width, height
@@ -29,7 +29,7 @@ class BaseBmpImageFormat(object):
     def get_planes_bits(self):
         init = self.LEN * 2
         end = init + 4
-        size = self._header_data.[init:planes]
+        size = self._header_data[init:planes]
         planes = i16(size[:len(size)/2])
         bits = i16(size[len(size)/2:])
         return planes, bits
@@ -73,6 +73,6 @@ class BmpImageFormat(BaseBmpImageFormat):
                     file_info[mask] = i32(header_data[36+idx*4:40+idx*4])
             else:
                 for mask in ['r_mask', 'g_mask', 'b_mask', 'a_mask']:
-                    file_info[mask] = i32(read(4))
+                    file_info[mask] = i32(self.read(4))
         file_info['rgb_mask'] = (file_info['r_mask'], file_info['g_mask'], file_info['b_mask'])
         file_info['rgba_mask'] = (file_info['r_mask'], file_info['g_mask'], file_info['b_mask'], file_info['a_mask'])

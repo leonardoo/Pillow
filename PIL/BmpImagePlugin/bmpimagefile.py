@@ -51,6 +51,7 @@ class BmpImageFile(ImageFile.ImageFile):
             # ----------------------------------------- Windows Bitmap v2 to v5
             else:  # v3 and OS/2
                 bmpformat = base.BmpImageFormat(header_data, 4)
+                bmpformat.read = read
         else:
             raise IOError("Unsupported BMP header type (%d)" % file_info['header_size'])
 
